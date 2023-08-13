@@ -18,4 +18,35 @@ describe('Todos apllication', () => {
 		});
 		expect(screen.getByText('buy some milk')).toBeInTheDocument();
 	});
+
+	it('completes an item when clicked', () => {
+		render(<Todo />);
+		const input = screen.getByTestId('todo-input');
+		act(() => {
+			userEvent.type(input, 'buy some milk');
+			userEvent.type(input, '{enter}');
+		});
+		const item = screen.getByText('buy some milk');
+		act(() => {
+			userEvent.click(item);
+		});
+
+		expect(item).toHaveAttribute('data-completed', 'true');
+	});
+
+	it('delete an item when button clicked', () => {
+		render(<Todo />);
+		const input = screen.getByTestId('todo-input');
+		act(() => {
+			userEvent.type(input, 'buy some milk');
+			userEvent.type(input, '{enter}');
+		});
+		const item = screen.getByText('buy some milk');
+		expect(item).toBeInTheDocument;
+		const deleteButton = screen.getByTestId('delete-button');
+		act(() => {
+			userEvent.click(deleteButton);
+		});
+		expect(item).not.toBeInTheDocument;
+	});
 });

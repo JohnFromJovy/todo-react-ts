@@ -10,18 +10,27 @@ export const TodoInput = ({
 	onItemAdded: (todo: TodoType) => void;
 }) => {
 	const [content, setContent] = useState<string>('');
+
+	// const clearInput = () => {
+	// 	const input = document.querySelector('input');
+	// 	input.value = '';
+	// };
+
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setContent(e.target.value);
+		// document.querySelector('input')?.value = '';
+		// clearInput();
 	};
 	const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter') {
 			const id = uuidv4();
-			onItemAdded({ id, content });
-			// setTodos([{ id, content }, ...todos]);
+			onItemAdded({ id, content, completed: false });
+			// clearInput();
 		}
 	};
 	return (
 		<input
+			className="todo-input"
 			type="text"
 			data-testid="todo-input"
 			onChange={handleChange}
