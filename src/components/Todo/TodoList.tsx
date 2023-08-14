@@ -25,7 +25,7 @@ export const TodoList = ({
 					<button
 						data-testid="delete-button"
 						onClick={() => onDeleteItem(todo)}>
-						deleete
+						delete
 					</button>
 				</div>
 			))}

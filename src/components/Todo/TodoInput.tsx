@@ -11,10 +11,10 @@ export const TodoInput = ({
 }) => {
 	const [content, setContent] = useState<string>('');
 
-	// const clearInput = () => {
-	// 	const input = document.querySelector('input');
-	// 	input.value = '';
-	// };
+	const clearInput = () => {
+		const inputText: any = document.querySelector('input');
+		inputText.value = '';
+	};
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setContent(e.target.value);
@@ -25,7 +25,7 @@ export const TodoInput = ({
 		if (e.key === 'Enter') {
 			const id = uuidv4();
 			onItemAdded({ id, content, completed: false });
-			// clearInput();
+			clearInput();
 		}
 	};
 	return (
