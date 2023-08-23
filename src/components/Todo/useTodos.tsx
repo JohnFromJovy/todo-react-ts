@@ -1,11 +1,19 @@
 import { useState } from 'react';
 import { TodoType } from './type';
 
-export const useTodos = () => {
-	const [todos, setTodos] = useState<TodoType[]>([]);
-
+export const useTodos = (items: TodoType[] = []) => {
+	const [todos, setTodos] = useState<TodoType[]>(items);
+	const [displayTodos, setDisplayTodos] = useState<TodoType[]>(items);
 	const addTodo = (todo: TodoType) => {
 		setTodos([todo, ...todos]);
+	};
+
+	const filterCompletedTodos = () => {
+		setDisplayTodos(todos.filter((todo) => todo.completed));
+	};
+
+	const filterTotalTodos = () => {
+		setDisplayTodos(todos);
 	};
 
 	const toggleTodo = (todo: TodoType) => {
@@ -23,5 +31,12 @@ export const useTodos = () => {
 		setTodos(todos.filter((item) => item.id !== todo.id));
 	};
 
-	return { todos, addTodo, toggleTodo, deleteTodo };
+	return {
+		todos: displayTodos,
+		addTodo,
+		filterCompletedTodos,
+		filterTotalTodos,
+		toggleTodo,
+		deleteTodo,
+	};
 };

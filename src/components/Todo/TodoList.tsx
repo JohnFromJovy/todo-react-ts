@@ -14,7 +14,8 @@ export const TodoList = ({
 			{todos.map((todo) => (
 				<div
 					className="todo-item"
-					key={todo.id}>
+					key={todo.id}
+					data-testid="todo-item">
 					<span
 						data-completed={todo.completed}
 						onClick={() => {
