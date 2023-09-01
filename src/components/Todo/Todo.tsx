@@ -10,6 +10,7 @@ const Todo = ({ items }: { items?: TodoType[] }) => {
 		addTodo,
 		filterCompletedTodos,
 		filterTotalTodos,
+		filterActiveTodos,
 		toggleTodo,
 		deleteTodo,
 	} = useTodos(items);
@@ -20,14 +21,21 @@ const Todo = ({ items }: { items?: TodoType[] }) => {
 			<TodoInput onItemAdded={addTodo} />
 			<div className="aggregation">
 				<button
+					data-testid="todo-total"
+					onClick={() => filterTotalTodos()}>
+					total
+				</button>
+
+				<button
 					data-testid="todo-completed"
 					onClick={() => filterCompletedTodos()}>
 					completed
 				</button>
+
 				<button
-					data-testid="todo-total"
-					onClick={() => filterTotalTodos()}>
-					total
+					data-testid="todo-active"
+					onClick={() => filterActiveTodos()}>
+					active
 				</button>
 			</div>
 			<TodoList
