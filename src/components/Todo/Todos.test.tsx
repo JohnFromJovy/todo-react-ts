@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Todo from './Todo';
 import { act } from 'react-dom/test-utils';
@@ -123,14 +123,23 @@ describe('Todos apllication', () => {
 		expect(screen.getAllByTestId('todo-item').length).toEqual(2);
 		expect(screen.getByText('buy some milk')).toBeInTheDocument();
 		expect(screen.getByText('pack up toys')).toBeInTheDocument();
+	});
 
-		// const totalTab = screen.getByTestId('todo-total');
-		// act(() => {
-		// 	userEvent.click(totalTab);
-		// });
-		// expect(screen.getAllByTestId('todo-item').length).toEqual(3);
-		// expect(screen.getByText('learn javascript & react')).toBeInTheDocument();
-		// expect(screen.getByText('buy some milk')).toBeInTheDocument();
-		// expect(screen.getByText('pack up toys')).toBeInTheDocument();
+	it('show how many tasks on each tab', () => {
+		const items = [
+			{ id: '1', content: 'buy some milk', completed: false },
+			{ id: '2', content: 'learn javascript & react', completed: true },
+			{ id: '3', content: 'pack up toys', completed: false },
+		];
+		render(<Todo items={items} />);
+		const totalTab = screen.getByTestId('todo-total');
+		expect(within(totalTab).getByText('3')).toBeInTheDocument();
+
+		const completedTab = screen.getByTestId('todo-completed');
+		expect(within(completedTab).getByText('1')).toBeInTheDocument();
+
+		// expect(todoItems.length).toEqual(items.length);
+		const activeTab = screen.getByTestId('todo-active');
+		expect(within(activeTab).getByText('2')).toBeInTheDocument();
 	});
 });

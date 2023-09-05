@@ -6,11 +6,10 @@ import { useTodos } from './useTodos';
 
 const Todo = ({ items }: { items?: TodoType[] }) => {
 	const {
-		todos,
+		displayTodos,
+		aggregation,
+		setCategory,
 		addTodo,
-		filterCompletedTodos,
-		filterTotalTodos,
-		filterActiveTodos,
 		toggleTodo,
 		deleteTodo,
 	} = useTodos(items);
@@ -20,26 +19,35 @@ const Todo = ({ items }: { items?: TodoType[] }) => {
 			<h2>todos</h2>
 			<TodoInput onItemAdded={addTodo} />
 			<div className="aggregation">
-				<button
-					data-testid="todo-total"
-					onClick={() => filterTotalTodos()}>
-					total
-				</button>
-
-				<button
-					data-testid="todo-completed"
-					onClick={() => filterCompletedTodos()}>
-					completed
-				</button>
-
-				<button
-					data-testid="todo-active"
-					onClick={() => filterActiveTodos()}>
-					active
-				</button>
+				<div>
+					<label>
+						Total:
+						<button
+							data-testid="todo-total"
+							onClick={() => setCategory('total')}>
+							{aggregation.total}
+						</button>
+					</label>
+					<label>
+						Completed:
+						<button
+							data-testid="todo-completed"
+							onClick={() => setCategory('completed')}>
+							{aggregation.completed}
+						</button>
+					</label>
+					<label>
+						Active:
+						<button
+							data-testid="todo-active"
+							onClick={() => setCategory('active')}>
+							{aggregation.active}
+						</button>
+					</label>
+				</div>
 			</div>
 			<TodoList
-				todos={todos}
+				todos={displayTodos}
 				onToggleItem={toggleTodo}
 				onDeleteItem={deleteTodo}
 			/>
