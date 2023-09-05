@@ -3,12 +3,13 @@ import { TodoInput } from './TodoInput';
 import { TodoType } from './type';
 import './Todo.css';
 import { useTodos } from './useTodos';
+import { Aggregation } from './Aggregation';
 
 const Todo = ({ items }: { items?: TodoType[] }) => {
 	const {
 		displayTodos,
 		aggregation,
-		setCategory,
+		setCategory: switchCategory,
 		addTodo,
 		toggleTodo,
 		deleteTodo,
@@ -18,34 +19,10 @@ const Todo = ({ items }: { items?: TodoType[] }) => {
 		<div className="todo-container">
 			<h2>todos</h2>
 			<TodoInput onItemAdded={addTodo} />
-			<div className="aggregation">
-				<div>
-					<label>
-						Total:
-						<button
-							data-testid="todo-total"
-							onClick={() => setCategory('total')}>
-							{aggregation.total}
-						</button>
-					</label>
-					<label>
-						Completed:
-						<button
-							data-testid="todo-completed"
-							onClick={() => setCategory('completed')}>
-							{aggregation.completed}
-						</button>
-					</label>
-					<label>
-						Active:
-						<button
-							data-testid="todo-active"
-							onClick={() => setCategory('active')}>
-							{aggregation.active}
-						</button>
-					</label>
-				</div>
-			</div>
+			<Aggregation
+				aggregation={aggregation}
+				switchCategory={switchCategory}
+			/>
 			<TodoList
 				todos={displayTodos}
 				onToggleItem={toggleTodo}
