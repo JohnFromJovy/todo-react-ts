@@ -14,7 +14,7 @@ export const Category = ({
 			<label>
 				{label}
 				<button
-					data-testid={'todo-${type}'}
+					data-testid={`todo-${type}`}
 					onClick={() => switchCategory(type)}>
 					{number}
 				</button>

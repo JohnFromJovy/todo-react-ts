@@ -4,6 +4,7 @@ import { TodoType } from './type';
 import './Todo.css';
 import { useTodos } from './useTodos';
 import { Aggregation } from './Aggregation';
+import { SearchBox } from './SearchBox';
 
 const Todo = ({ items }: { items?: TodoType[] }) => {
 	const {
@@ -13,6 +14,7 @@ const Todo = ({ items }: { items?: TodoType[] }) => {
 		addTodo,
 		toggleTodo,
 		deleteTodo,
+		search,
 	} = useTodos(items);
 
 	return (
@@ -23,6 +25,7 @@ const Todo = ({ items }: { items?: TodoType[] }) => {
 				aggregation={aggregation}
 				switchCategory={switchCategory}
 			/>
+			<SearchBox performSearch={search} />
 			<TodoList
 				todos={displayTodos}
 				onToggleItem={toggleTodo}

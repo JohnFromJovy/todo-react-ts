@@ -30,9 +30,10 @@ export const TodoInput = ({
 	};
 	return (
 		<input
+			data-testid="todo-input"
 			className="todo-input"
 			type="text"
-			data-testid="todo-input"
+			placeholder="Add todo task here"
 			onChange={handleChange}
 			onKeyDown={handleKeyDown}></input>
 	);
